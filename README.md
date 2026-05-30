@@ -23,7 +23,7 @@ jobs:
   summarize:
     runs-on: ubuntu-latest
     steps:
-      - uses: OWNER/REPOSITORY@v1
+      - uses: tobiasbueschel/eow-summary-pr-action@v1
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           EOW_SYSTEM_PROMPT: ${{ vars.EOW_SYSTEM_PROMPT }}
