@@ -74,12 +74,14 @@ The action gathers repository activity through the GitHub API and does not requi
 
 ## Releasing
 
-Releases are managed by release-please. Use Conventional Commits on `main`:
+Release metadata is configured for release-please. Use Conventional Commits on `main`:
 
 - `fix:` creates a patch release.
 - `feat:` creates a minor release.
 - `feat!:` or a `BREAKING CHANGE:` footer creates a major release.
 
-When release-please opens a release PR, merge it to create the GitHub release. The release workflow also updates floating action tags such as `v1` and `v1.0`, so users can depend on `tobiasbueschel/eow-summary-pr-action@v1`.
+Run release-please manually or from an external automation repository. This action repository intentionally does not contain workflow files because GitHub Marketplace requires Marketplace action repositories to avoid workflow files.
+
+When release-please opens a release PR, merge it to create the GitHub release. For GitHub Actions, also update floating action tags such as `v1` and `v1.0`, so users can depend on `tobiasbueschel/eow-summary-pr-action@v1`.
 
 Before first Marketplace publication, confirm `action.yml` has a Marketplace-unique `name`, publish the initial `v1.0.0` GitHub release, and select "Publish this Action to the GitHub Marketplace" from the release page.
