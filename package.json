@@ -1,0 +1,33 @@
+{
+  "name": "end-of-week-summary-pr-action",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A GitHub Action that opens weekly end-of-week summary pull requests using repository activity and OpenAI.",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc --noEmit && ncc build src/index.ts --license licenses.txt -o dist",
+    "test": "tsc -p tsconfig.test.json && node --test .test-build/test/*.test.js",
+    "check": "npm run test && npm run build"
+  },
+  "keywords": [
+    "github-action",
+    "marketplace",
+    "weekly-summary",
+    "openai"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@vercel/ncc": "^0.38.3",
+    "typescript": "^5.8.3"
+  },
+  "overrides": {
+    "undici": "^6.24.0"
+  }
+}

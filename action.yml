@@ -1,0 +1,56 @@
+name: End of Week Summary PR
+author: ""
+description: Create a weekly pull request with an AI-generated end-of-week repository summary.
+branding:
+  icon: git-pull-request
+  color: blue
+inputs:
+  base_branch:
+    description: Branch to summarize and target with the pull request. Defaults to the repository default branch.
+    required: false
+  summary_path:
+    description: Path to the rolling Markdown summary file.
+    required: false
+    default: EOW_SUMMARY.md
+  pr_branch:
+    description: Branch used for the generated pull request. This branch is force-updated by the action.
+    required: false
+    default: eow-summary/update
+  pr_title:
+    description: Pull request title.
+    required: false
+    default: End of week summary
+  model:
+    description: OpenAI model used to generate the summary.
+    required: false
+    default: gpt-5.4-mini
+  lookback_fallback_days:
+    description: Number of days to summarize when no previous summary marker exists.
+    required: false
+    default: "7"
+  max_prompt_chars:
+    description: Maximum activity payload characters sent to OpenAI after repository activity is collected.
+    required: false
+    default: "120000"
+  openai_timeout_ms:
+    description: OpenAI request timeout in milliseconds.
+    required: false
+    default: "60000"
+  github_token:
+    description: GitHub token used to read repository activity and create the summary pull request.
+    required: false
+    default: ${{ github.token }}
+outputs:
+  pull_request_url:
+    description: URL of the created or updated pull request.
+  pull_request_number:
+    description: Number of the created or updated pull request.
+  summary_start:
+    description: ISO timestamp for the beginning of the summarized window.
+  summary_end:
+    description: ISO timestamp for the end of the summarized window.
+  changed:
+    description: Whether the summary branch was updated.
+runs:
+  using: node24
+  main: dist/index.js
