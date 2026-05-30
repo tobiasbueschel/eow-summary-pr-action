@@ -1,6 +1,6 @@
 {
   "name": "eow-summary-pr-action",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "description": "A GitHub Action that opens weekly end-of-week summary pull requests using repository activity and OpenAI.",
   "type": "module",

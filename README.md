@@ -2,7 +2,7 @@
 
 Create a weekly pull request with an AI-generated end-of-week summary for a repository. The action reads commits, pull requests, and releases from GitHub, sends the normalized activity to OpenAI, updates a rolling Markdown summary file, and opens or updates a pull request against the target branch.
 
-This repository is structured for GitHub Marketplace publication: it contains one root `action.yml`, the action code, and the bundled `dist/index.js`. It intentionally does not contain `.github/workflows` files.
+This repository is structured for GitHub Marketplace publication: it contains one root `action.yml`, the action code, and the bundled `dist/index.js`.
 
 ## Usage
 
@@ -72,11 +72,14 @@ Every run writes a fresh summary file and opens or updates a pull request, inclu
 
 The action gathers repository activity through the GitHub API and does not require `actions/checkout`.
 
-## Marketplace Release Notes
+## Releasing
 
-Before publishing:
+Releases are managed by release-please. Use Conventional Commits on `main`:
 
-1. Push the repository publicly.
-2. Confirm `action.yml` has a Marketplace-unique `name`.
-3. Build and commit `dist/index.js`.
-4. Tag and publish a release, then select "Publish this Action to the GitHub Marketplace".
+- `fix:` creates a patch release.
+- `feat:` creates a minor release.
+- `feat!:` or a `BREAKING CHANGE:` footer creates a major release.
+
+When release-please opens a release PR, merge it to create the GitHub release. The release workflow also updates floating action tags such as `v1` and `v1.0`, so users can depend on `tobiasbueschel/eow-summary-pr-action@v1`.
+
+Before first Marketplace publication, confirm `action.yml` has a Marketplace-unique `name`, publish the initial `v1.0.0` GitHub release, and select "Publish this Action to the GitHub Marketplace" from the release page.
