@@ -8,7 +8,11 @@
   "scripts": {
     "build": "tsc --noEmit && ncc build src/index.ts --license licenses.txt -o dist",
     "test": "tsc -p tsconfig.test.json && node --test .test-build/test/*.test.js",
-    "check": "npm run test && npm run build"
+    "check": "npm run test && npm run build",
+    "release:dry-run": "release-please release-pr --dry-run --token=$GITHUB_TOKEN --repo-url=tobiasbueschel/eow-summary-pr-action --config-file=release-please-config.json --manifest-file=.release-please-manifest.json",
+    "release:pr": "release-please release-pr --token=$GITHUB_TOKEN --repo-url=tobiasbueschel/eow-summary-pr-action --config-file=release-please-config.json --manifest-file=.release-please-manifest.json",
+    "release:github": "release-please github-release --token=$GITHUB_TOKEN --repo-url=tobiasbueschel/eow-summary-pr-action --config-file=release-please-config.json --manifest-file=.release-please-manifest.json",
+    "release:update-floating-tags": "node scripts/update-floating-tags.mjs"
   },
   "keywords": [
     "github-action",
@@ -25,6 +29,7 @@
   "devDependencies": {
     "@types/node": "^24.0.0",
     "@vercel/ncc": "^0.38.3",
+    "release-please": "^17.9.0",
     "typescript": "^5.8.3"
   },
   "overrides": {

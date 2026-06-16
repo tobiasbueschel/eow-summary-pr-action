@@ -31,6 +31,8 @@ jobs:
 
 Scheduled workflows run in UTC from the latest commit on the repository default branch. The `base_branch` input controls which branch the action summarizes and targets with the pull request; it does not change which branch GitHub uses to load the workflow file.
 
+Before the first release exists, use `tobiasbueschel/eow-summary-pr-action@main` for smoke testing. Use `@v1` after release-please has created the initial release and the floating tags have been updated.
+
 ## Inputs
 
 | Input | Default | Description |
@@ -72,7 +74,7 @@ The action gathers repository activity through the GitHub API and does not requi
 
 ## Releasing
 
-Release metadata is configured for release-please. Use Conventional Commits on `main`:
+Releases are managed with release-please. Use Conventional Commits on `main`:
 
 - `fix:` creates a patch release.
 - `feat:` creates a minor release.
@@ -80,6 +82,22 @@ Release metadata is configured for release-please. Use Conventional Commits on `
 
 Run release-please manually or from an external automation repository. This action repository intentionally does not contain workflow files because GitHub Marketplace requires Marketplace action repositories to avoid workflow files.
 
-When release-please opens a release PR, merge it to create the GitHub release. For GitHub Actions, also update floating action tags such as `v1` and `v1.0`, so users can depend on `tobiasbueschel/eow-summary-pr-action@v1`.
+```bash
+export GITHUB_TOKEN=<token-with-repo-write-access>
+npm run release:dry-run
+npm run release:pr
+```
 
-Before first Marketplace publication, confirm `action.yml` has a Marketplace-unique `name`, publish the initial `v1.0.0` GitHub release, and select "Publish this Action to the GitHub Marketplace" from the release page.
+After merging the release PR, create the GitHub release with release-please:
+
+```bash
+npm run release:github
+```
+
+For GitHub Actions, also update floating action tags such as `v1` and `v1.0`, so users can depend on `tobiasbueschel/eow-summary-pr-action@v1`:
+
+```bash
+npm run release:update-floating-tags
+```
+
+Before first Marketplace publication, confirm `action.yml` has a Marketplace-unique `name`, create the initial GitHub release through release-please, and select "Publish this Action to the GitHub Marketplace" from the release page.
