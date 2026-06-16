@@ -2,8 +2,6 @@
 
 Create a weekly pull request with an AI-generated end-of-week summary for a repository. The action reads commits, pull requests, and releases from GitHub, sends the normalized activity to OpenAI, updates a rolling Markdown summary file, and opens or updates a pull request against the target branch.
 
-This repository is structured for GitHub Marketplace publication: it contains one root `action.yml`, the action code, and the bundled `dist/index.js`.
-
 ## Usage
 
 ```yaml
