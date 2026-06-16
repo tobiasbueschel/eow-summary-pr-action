@@ -31,7 +31,7 @@ jobs:
 
 Scheduled workflows run in UTC from the latest commit on the repository default branch. The `base_branch` input controls which branch the action summarizes and targets with the pull request; it does not change which branch GitHub uses to load the workflow file.
 
-Before the first release exists, use `tobiasbueschel/eow-summary-pr-action@main` for smoke testing. Use `@v1` after release-please has created the initial release and the floating tags have been updated.
+Before the first release exists, use `tobiasbueschel/eow-summary-pr-action@main` for smoke testing. Use `@v1` after release-please creates the initial release and the workflow updates the floating tags.
 
 ## Inputs
 
@@ -80,7 +80,7 @@ Releases are managed with release-please. Use Conventional Commits on `main`:
 - `feat:` creates a minor release.
 - `feat!:` or a `BREAKING CHANGE:` footer creates a major release.
 
-Run release-please manually or from an external automation repository. This action repository intentionally does not contain workflow files because GitHub Marketplace requires Marketplace action repositories to avoid workflow files.
+Release PRs are created by the `release-please` GitHub Actions workflow on pushes to `main`. You can also run it manually from the repository's Actions tab.
 
 ```bash
 export GITHUB_TOKEN=<token-with-repo-write-access>
@@ -88,15 +88,14 @@ npm run release:dry-run
 npm run release:pr
 ```
 
-After merging the release PR, create the GitHub release with release-please:
+The local commands above are optional maintainer tools. The GitHub workflow is the normal release path.
+
+After merging the release PR, the workflow creates the GitHub release with release-please and updates the floating action tags such as `v1` and `v1.0`, so users can depend on `tobiasbueschel/eow-summary-pr-action@v1`.
+
+If you create a release from a local machine instead of the workflow, run:
 
 ```bash
 npm run release:github
-```
-
-For GitHub Actions, also update floating action tags such as `v1` and `v1.0`, so users can depend on `tobiasbueschel/eow-summary-pr-action@v1`:
-
-```bash
 npm run release:update-floating-tags
 ```
 
