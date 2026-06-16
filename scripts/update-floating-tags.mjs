@@ -13,6 +13,10 @@ const versionTag = `v${version}`;
 const majorTag = `v${major}`;
 const minorTag = `v${major}.${minor}`;
 
+execFileSync("git", ["config", "user.name", "github-actions[bot]"], { stdio: "inherit" });
+execFileSync("git", ["config", "user.email", "41898282+github-actions[bot]@users.noreply.github.com"], {
+  stdio: "inherit",
+});
 execFileSync("git", ["fetch", "--tags", "origin"], { stdio: "inherit" });
 execFileSync("git", ["rev-parse", "--verify", versionTag], { stdio: "inherit" });
 execFileSync("git", ["tag", "-fa", majorTag, "-m", `Release ${majorTag}`, versionTag], { stdio: "inherit" });
